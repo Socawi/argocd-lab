@@ -16,13 +16,13 @@ spec:
     spec:
       containers:
         - name: podinfo
-          image: ghcr.io/stefanprodan/podinfo:6.7.0   # tag fijo, NUNCA :latest en GitOps
+          image: ghcr.io/stefanprodan/podinfo:6.7.1   # tag fijo, NUNCA :latest en GitOps
           ports:
             - containerPort: 9898
               name: http
           env:
             - name: PODINFO_UI_MESSAGE
-              value: "Hola desde GitOps"
+              value: "Mi primer upgrade GitOps"
           readinessProbe:
             httpGet: { path: /readyz, port: http }
           livenessProbe:
