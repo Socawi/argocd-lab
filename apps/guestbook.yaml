@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: guestbook
+  namespace: argocd            # las Applications SIEMPRE van en el namespace de Argo CD
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io   # ver nota abajo
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/argoproj/argocd-example-apps.git
+    targetRevision: HEAD       # rama, tag o commit SHA
+    path: guestbook            # carpeta dentro del repo
+  destination:
+    server: https://kubernetes.default.svc   # = el propio clúster ("in-cluster")
+    namespace: guestbook
+  syncPolicy:
+    automated:
+      prune: true      # borra del clúster lo que se elimine de Git
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true   # crea el namespace destino si no existe
+    # SIN "automated": de momento la sincronización es MANUAL, a propósito
