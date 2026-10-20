@@ -1,0 +1,4 @@
+replicaCount: 2
+ui:
+  message: "Desde Helm + Argo CD"
+  color: "#34577c"

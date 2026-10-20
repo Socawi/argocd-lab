@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: podinfo-helm
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  sources:                       # ojo: "sources" en plural
+    - repoURL: https://stefanprodan.github.io/podinfo   # repo HELM, no Git
+      chart: podinfo
+      targetRevision: 6.7.1      # con Helm, targetRevision es la VERSIÓN DEL CHART
+      helm:
+        releaseName: podinfo
+        valueFiles:
+          - $values/values/podinfo-helm/values.yaml
+    - repoURL: https://github.com/Socawi/argocd-lab.git
+      targetRevision: main
+      ref: values                # este nombre es el que se usa como "$values"
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: podinfo-helm
+  syncPolicy:
+    automated: { prune: true, selfHeal: true }
+    syncOptions: [CreateNamespace=true]
