@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: root
+  namespace: argocd
+  # Sin finalizer a propósito: borrar root NO debe borrar el cluster entero
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/Socawi/argocd-lab.git
+    targetRevision: main
+    path: apps
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd          # las Application viven en el namespace argocd
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
