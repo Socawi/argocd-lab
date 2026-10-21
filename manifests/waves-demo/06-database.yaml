@@ -1,0 +1,10 @@
+apiVersion: demo.socawi.io/v1
+kind: Database
+metadata:
+  name: main-db
+  annotations:
+    argocd.argoproj.io/sync-wave: "-2"
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+spec:
+  engine: postgres
+  size: 1Gi
