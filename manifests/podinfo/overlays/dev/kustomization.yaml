@@ -21,4 +21,4 @@ patches:
               - name: podinfo
                 env:
                   - name: PODINFO_UI_MESSAGE
-                    value: "Entorno DEV"
+                    value: "Entorno DEV v2"
