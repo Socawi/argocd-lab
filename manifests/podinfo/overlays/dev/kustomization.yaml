@@ -7,7 +7,7 @@ replicas:
     count: 1
 images:
   - name: ghcr.io/stefanprodan/podinfo
-    newTag: 6.7.1            # dev va por delante
+    newTag: 6.99.0            # dev va por delante
 patches:
   - patch: |-
       apiVersion: apps/v1
