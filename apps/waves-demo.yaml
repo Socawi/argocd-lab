@@ -1,0 +1,35 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: waves-demo
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/Socawi/argocd-lab.git
+    targetRevision: main
+    path: manifests/waves-demo
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: waves-demo
+  ignoreDifferences:
+    - group: apps
+      kind: Deployment
+      name: podinfo
+      jsonPointers:
+        - /spec/replicas
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - RespectIgnoreDifferences=true
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 3m
