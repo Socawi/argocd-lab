@@ -3,8 +3,6 @@ kind: AppProject
 metadata:
   name: podinfo
   namespace: argocd
-  annotations:
-    argocd.argoproj.io/sync-wave: "-1"      # el proyecto debe existir antes que las apps que lo usan
 spec:
   description: Entornos de podinfo (dev, prod)
   sourceRepos:
@@ -22,5 +20,5 @@ spec:
       kind: Service
     - group: ''
       kind: ConfigMap
-    - group: ''
-      kind: Secret
+    - group: bitnami.com
+      kind: SealedSecret
