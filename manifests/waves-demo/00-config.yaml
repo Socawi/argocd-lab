@@ -5,4 +5,4 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "-1"
 data:
-  PODINFO_UI_MESSAGE: "Waves demo v1"
+  PODINFO_UI_MESSAGE: "Waves demo v2"
