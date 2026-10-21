@@ -14,19 +14,12 @@ spec:
   destination:
     server: https://kubernetes.default.svc
     namespace: waves-demo
-  ignoreDifferences:
-    - group: apps
-      kind: Deployment
-      name: podinfo
-      jsonPointers:
-        - /spec/replicas
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
-      - RespectIgnoreDifferences=true
     retry:
       limit: 5
       backoff:
