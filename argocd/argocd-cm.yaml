@@ -3,6 +3,7 @@ kind: ConfigMap
 metadata:
   name: argocd-cm
 data:
+  accounts.alice: login
   resource.customizations.health.demo.socawi.io_Database: |
     hs = {}
     if obj.status ~= nil and obj.status.phase ~= nil then

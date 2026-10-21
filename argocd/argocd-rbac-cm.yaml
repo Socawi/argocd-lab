@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-rbac-cm
+data:
+  policy.default: role:readonly
+  policy.csv: |
+    p, role:podinfo-dev-deployer, applications, sync, podinfo/podinfo-dev, allow
+    g, alice, role:podinfo-dev-deployer
