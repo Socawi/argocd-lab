@@ -6,6 +6,9 @@ metadata:
 spec:
   goTemplate: true
   goTemplateOptions: ["missingkey=error"]
+  syncPolicy:
+    preserveResourcesOnDeletion: true
+    applicationsSync: create-update
   generators:
     - git:
         repoURL: https://github.com/Socawi/argocd-lab.git
