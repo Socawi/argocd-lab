@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: podinfo
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"      # el proyecto debe existir antes que las apps que lo usan
+spec:
+  description: Entornos de podinfo (dev, prod)
+  sourceRepos:
+    - https://github.com/Socawi/argocd-lab.git
+  destinations:
+    - server: https://kubernetes.default.svc
+      namespace: 'podinfo-*'
+  clusterResourceWhitelist:
+    - group: ''
+      kind: Namespace
+  namespaceResourceWhitelist:
+    - group: apps
+      kind: Deployment
+    - group: ''
+      kind: Service
+    - group: ''
+      kind: ConfigMap

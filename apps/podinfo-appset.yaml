@@ -21,7 +21,7 @@ spec:
       finalizers:
         - resources-finalizer.argocd.argoproj.io
     spec:
-      project: default
+      project: podinfo
       source:
         repoURL: https://github.com/Socawi/argocd-lab.git
         targetRevision: main
